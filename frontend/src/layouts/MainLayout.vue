@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHr lpR lFr">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="tw-bg-rose-800 tw-border-b-4 tw-border-b-amber-400">
         <q-btn
           flat
           dense
@@ -12,10 +12,9 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          <span>{{ APP_NAME }}</span>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -28,7 +27,7 @@
         <q-item-label
           header
         >
-          Essential Links
+          Menu
         </q-item-label>
 
         <EssentialLink
@@ -45,28 +44,17 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
+import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import { linksList } from '../utils/navMenu.js'
 
-export default defineComponent({
-  name: 'MainLayout',
+const APP_NAME = import.meta.env.VITE_APP_NAME
+const leftDrawerOpen = ref(false)
+const essentialLinks = linksList
 
-  components: {
-    EssentialLink
-  },
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value
+}
 
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-})
 </script>

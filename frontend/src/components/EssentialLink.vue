@@ -2,8 +2,8 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
     :href="link"
+    class="tw-bg-neutral-300 tw-border-r-[3px] tw-border-amber-400"
   >
     <q-item-section
       v-if="icon"
