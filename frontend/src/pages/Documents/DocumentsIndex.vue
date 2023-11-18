@@ -12,7 +12,7 @@
 
           <div>
             <q-btn
-              href="/new"
+              to="/documents/new"
               color="amber-6"
               label="Create New"
               class="tw-mr-3"

@@ -11,7 +11,7 @@
           </div>
           <div>
             <q-btn
-              href="/"
+              to="/documents"
               label="Back to list"
               color="white"
               text-color="black"

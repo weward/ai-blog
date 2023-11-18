@@ -8,7 +8,7 @@ class DocumentService {
 
     public function filter()
     {
-        $documents = Document::query()->get();
+        $documents = Document::query()->paginate();
 
         return $documents;
     }

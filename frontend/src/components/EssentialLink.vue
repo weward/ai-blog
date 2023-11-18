@@ -1,9 +1,10 @@
 <template>
   <q-item
-    clickable
-    tag="a"
-    :href="link"
+    :to="link"
+    :active="true"
+    active-class="text-grey-8 tw-font-bold"
     class="tw-bg-neutral-300 tw-border-r-[3px] tw-border-amber-400"
+    clickable
   >
     <q-item-section
       v-if="icon"
