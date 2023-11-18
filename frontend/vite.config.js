@@ -4,5 +4,4 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   // plugins: [vue(), vueJsx()],
-  plugins: [vue(), vueJsx()],
 });
