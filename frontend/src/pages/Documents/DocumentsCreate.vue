@@ -32,6 +32,8 @@
             v-model="form.keyword"
             label="Keyword"
             rows="5"
+            :error="errors.form.hasOwnProperty('keyword') ?? false"
+            :error-message="errors.form.keyword?.[0] ?? ''"
             outlined
             autogrow
           />
@@ -67,6 +69,8 @@
               v-model="form.results"
               label="Results"
               rows="10"
+              :error="errors.form.hasOwnProperty('results') ?? false"
+              :error-message="errors.form.results?.[0] ?? ''"
               filled
               autogrow
             />
@@ -77,7 +81,7 @@
         <div class="tw-text-center tw-py-12">
           <q-btn
             v-if="!data.hasResults"
-            @click="() => generate()"
+            @click="generate"
             color="amber-6"
             label="Generate"
             class="tw-mr-3"
@@ -87,21 +91,24 @@
 
           <q-btn
             v-if="data.hasResults"
-            label="Copy Results"
-            color="white"
-            text-color="black"
-            icon="content_copy"
+            @click="save"
+            label="Save"
+            color="amber-6"
+            icon="save"
             class="tw-mr-3"
             rounded
+            unelevated
           />
 
           <q-btn
             v-if="data.hasResults"
-            @click="() => reset()"
+            @click="reset"
             label="Reset"
-            color="amber-6"
+            color="white"
+            text-color="black"
             icon="refresh"
             rounded
+            outline
             unelevated
           />
         </div>
@@ -129,10 +136,36 @@ const data = reactive({
   hasResults: false,
 })
 
+const errors = reactive({
+  form: {},
+})
+
 const generate = () => {
   data.loading = true
   data.hasResults = true
   data.loading = false
+}
+const save = () => {
+  data.loading = true
+
+  axios.post(url, {
+    keyword: data.keyword,
+    summary: data.summary,
+    bullets: data.bullets,
+    result: data.result,
+  }).then(() => {
+
+  }).catch(() => {
+    if ([404, 500].includes(err.response?.status)) {
+      notify(err.response?.data)
+    }
+    if (err.response?.status == 422) {
+      reject(err.response?.data?.errors)
+      return
+    }
+  }).finally(() => {
+    data.loading = false
+  })
 }
 
 const reset = () => {
