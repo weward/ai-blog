@@ -21,7 +21,7 @@
 
         <q-card-section>
           <div class="text-subtitle2 tw-py-3">Content</div>
-          {{ data.entity.result }}
+          <div v-html="data.entity.result"></div>
         </q-card-section>
       </q-card>
     </div>

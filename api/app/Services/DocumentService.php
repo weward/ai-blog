@@ -19,7 +19,7 @@ class DocumentService {
                 'subject' => $request->subject,
                 'summary' => $request->summary,
                 'bullets' => $request->bullets,
-                'result' => $request->result,
+                'result' => nl2br($request->result),
             ]);
 
             return $document;
