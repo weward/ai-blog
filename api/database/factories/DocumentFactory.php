@@ -17,17 +17,17 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject' => fake()->realText(20, 2),
-            'summary' => fake()->realText(100, 2),
+            'subject' => fake()->realText(80, 2),
+            'summary' => fake()->realText(200, 2),
             'bullets' => $this->createBullets(),
-            'result' => fake()->realText(500, 2),
+            'result' => fake()->realText(3600, 2),
         ];
     }
 
     public function createBullets()
     {
         $min = 4;
-        $max = 15;
+        $max = 8;
         $rand = rand($min, $max);
 
         $i = 0;

@@ -13,6 +13,7 @@
       rows-per-page-options=""
       wrap-cells="true"
       @request="getAllData"
+      @row-click="(evt, row, index) => viewDocument(row)"
       class="tw-flex">
     </q-table>
   </div>
@@ -55,6 +56,10 @@
       }).finally(() => {
         data.loading = false
       })
+  }
+
+  const viewDocument = (row) => {
+    router.push({ name: 'documents.show', params: {id: row.id} })
   }
 
   onMounted(async () => {

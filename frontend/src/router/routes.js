@@ -6,7 +6,8 @@ const routes = [
     children: [
       { path: '/', redirect: 'documents' },
       { path: 'documents/', name: 'documents.index', component: () => import('pages/Documents/DocumentsIndex.vue') },
-      { path: 'documents/new', name: 'documents.create', component: () => import('pages/Documents/DocumentsCreate.vue') }
+      { path: 'documents/new', name: 'documents.create', component: () => import('pages/Documents/DocumentsCreate.vue') },
+      { path: 'documents/:id', name: 'documents.show', params: true, component: () => import('pages/Documents/DocumentsShow.vue') },
     ]
   },
 

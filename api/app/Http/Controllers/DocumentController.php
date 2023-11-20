@@ -7,6 +7,7 @@ use App\Http\Resources\DocumentCollection;
 use App\Http\Resources\DocumentResource;
 use App\Models\Document;
 use App\Services\DocumentService;
+use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
@@ -35,5 +36,10 @@ class DocumentController extends Controller
         $entity = $this->documentService->store($request);
 
         return new DocumentResource($entity);
+    }
+
+    public function show(Request $request, Document $document)
+    {
+        return new DocumentResource($document);
     }
 }

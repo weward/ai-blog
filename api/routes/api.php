@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AIArticleController;
 use App\Http\Controllers\DocumentController;
+use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::bind('document', function($param) {
+    return Document::findOrFail($param);
 });
 
 Route::prefix('documents')->group(function() {
     Route::get('/', [DocumentController::class, 'index'])->name('documents.index');
     Route::post('/', [DocumentController::class, 'store'])->name('documents.store');
+    Route::get('{document}', [DocumentController::class, 'show'])->name('documents.show');
 
     Route::post('/article-plot', [AIArticleController::class, 'generatePlot'])->name('documents.article-plot');
     Route::post('/article-result', [AIArticleController::class, 'generateResult'])->name('documents.article-result');

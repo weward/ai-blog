@@ -6,7 +6,8 @@ export const documentsTableColumns = [
     align: 'left',
     field: row => row.subject,
     format: val => `${val}`,
-    sortable: false
+    sortable: false,
+    value: 'documents'
   },
   {
     name: 'summary',

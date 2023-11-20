@@ -18,7 +18,7 @@ class DocumentResource extends JsonResource
             'id' => $this->id,
             'subject' => $this->subject,
             'summary' => $this->summary,
-            'bullets' => $this->bullets,
+            'bullets' => str_replace('\\n', '<br>', $this->bullets),
             'result' => $this->result,
             'created_at' => $this->created_at->copy()->diffForHumans(),
             'updated_at' => $this->updated_at->copy()->diffForHumans(),
