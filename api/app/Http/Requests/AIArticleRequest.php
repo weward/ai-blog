@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DocumentRequest extends FormRequest
+class AIArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,7 @@ class DocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => 'required|min:2',
-            'summary' => 'required|min:2',
-            'bullets' => 'required|min:2',
-            'result'  => 'required|min:2',
+            'subject' => 'required:min:2',
         ];
     }
 }

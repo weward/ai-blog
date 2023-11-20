@@ -16,10 +16,10 @@ class DocumentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'keyword' => $this->keyword,
+            'subject' => $this->subject,
             'summary' => $this->summary,
             'bullets' => $this->bullets,
-            'results' => $this->results,
+            'result' => $this->result,
             'created_at' => $this->created_at->copy()->diffForHumans(),
             'updated_at' => $this->updated_at->copy()->diffForHumans(),
         ];

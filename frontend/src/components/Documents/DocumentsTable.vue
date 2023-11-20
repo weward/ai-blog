@@ -4,12 +4,14 @@
       flat
       bordered
       title=""
+      :grid="$q.screen.xs"
       :rows="data.rows"
       :columns="data.columns"
       :loading="data.loading"
       row-key="id"
       v-model:pagination="data.pagination"
       rows-per-page-options=""
+      wrap-cells="true"
       @request="getAllData"
       class="tw-flex">
     </q-table>

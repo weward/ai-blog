@@ -1,10 +1,10 @@
 export const documentsTableColumns = [
   {
-    name: 'keyword',
+    name: 'subject',
     required: true,
     label: 'Keyword',
     align: 'left',
-    field: row => row.keyword,
+    field: row => row.subject,
     format: val => `${val}`,
     sortable: false
   },
@@ -24,6 +24,7 @@ export const documentsTableColumns = [
     align: 'right',
     field: row => row.updated_at,
     format: val => `${val}`,
+    style: 'width:240px',
     sortable: true
   },
 ]

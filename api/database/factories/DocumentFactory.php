@@ -17,10 +17,10 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            'keyword' => fake()->realText(20, 2),
+            'subject' => fake()->realText(20, 2),
             'summary' => fake()->realText(100, 2),
             'bullets' => $this->createBullets(),
-            'results' => fake()->realText(500, 2),
+            'result' => fake()->realText(500, 2),
         ];
     }
 

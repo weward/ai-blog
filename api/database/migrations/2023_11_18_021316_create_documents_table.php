@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string('keyword');
+            $table->string('subject');
             $table->text('summary');
             $table->text('bullets');
-            $table->text('results')->nullable();
+            $table->text('result')->nullable();
             $table->timestamps();
         });
     }

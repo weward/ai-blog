@@ -8,20 +8,25 @@ class DocumentService {
 
     public function filter()
     {
-        $documents = Document::query()->paginate();
+        $documents = Document::query()->orderBy('id', 'DESC')->paginate();
 
         return $documents;
     }
 
     public function store($request) {
-        $document = Document::create([
-            'keyword' => $request->keyword,
-            'summary' => $request->summary,
-            'bullets' => $request->bullets,
-            'results' => $request->results,
-        ]);
+        try {
+            $document = Document::create([
+                'subject' => $request->subject,
+                'summary' => $request->summary,
+                'bullets' => $request->bullets,
+                'result' => $request->result,
+            ]);
 
-        return $document;
+            return $document;
+        } catch(\Throwable $th) {
+            info($th->getMessage());
+            return false;
+        }
     }
 
 

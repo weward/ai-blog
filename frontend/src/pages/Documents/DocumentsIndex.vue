@@ -1,7 +1,7 @@
 <template>
   <q-page class="tw-w-full">
 
-    <q-card class="my-card tw-w-full tw-p-6">
+    <q-card class="my-card tw-w-full tw-pt-6 md:tw-p-6">
 
       <q-card-section>
         <div class="tw-flex tw-justify-between">
@@ -10,12 +10,11 @@
             <div class="tw-text-gray-600">Your list of AI-generated content</div>
           </div>
 
-          <div>
+          <div class="tw-self-center">
             <q-btn
               to="/documents/new"
               color="amber-6"
               label="Create New"
-              class="tw-mr-3"
               rounded
               unelevated
             />
@@ -37,17 +36,6 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
 import DocumentsTable from 'src/components/Documents/DocumentsTable.vue'
-
-const data = reactive({
-  formDefault: {},
-  loading: false,
-  hasResults: false,
-})
-
-onMounted(() => {
-
-})
 
 </script>
