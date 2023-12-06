@@ -20,8 +20,6 @@ class DocumentResource extends JsonResource
             'summary' => $this->summary,
             'bullets' => str_replace('\\n', '<br>', $this->bullets),
             'result' => $this->result,
-            // 'created_at' => $this->created_at->copy()->diffForHumans(),
-            // 'updated_at' => $this->updated_at->copy()->diffForHumans(),
             'created_at' => new DateTimeResource($this->created_at),
             'updated_at' => new DateTimeResource($this->updated_at),
         ];
