@@ -24,10 +24,8 @@ class DocumentService {
 
             return $document;
         } catch(\Throwable $th) {
-            info($th->getMessage());
             return false;
         }
     }
-
 
 }

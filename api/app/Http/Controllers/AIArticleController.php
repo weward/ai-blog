@@ -27,7 +27,7 @@ class AIArticleController extends Controller
 
         $httpStatus = $summary && $bullets ? 200 : 500;
 
-        return response()->json($result, $httpStatus);
+        return response()->jsonApi($result, $httpStatus);
     }
 
     public function generateResult(Request $request)
@@ -36,7 +36,7 @@ class AIArticleController extends Controller
 
         $httpStatus = $result ? 200 : 500;
 
-        return response()->json($result, $httpStatus);
+        return response()->jsonApi($result, $httpStatus);
     }
 
 }

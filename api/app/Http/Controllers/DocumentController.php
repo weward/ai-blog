@@ -25,21 +25,25 @@ class DocumentController extends Controller
     {
         $entities = $this->documentService->filter();
 
-        return new DocumentCollection($entities);
+        return response()->jsonApi(new DocumentCollection($entities), 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+ * Store a newly created resource in storage.
      */
     public function store(DocumentRequest $request)
     {
         $entity = $this->documentService->store($request);
 
-        return new DocumentResource($entity);
+        if (!$entity) {
+            return response()->json('Failed to create new Document', 500);
+        }
+
+        return response()->jsonApi(new DocumentResource($entity), 201);
     }
 
     public function show(Request $request, Document $document)
     {
-        return new DocumentResource($document);
+        return response()->jsonApi(new DocumentResource($document), 200);
     }
 }
