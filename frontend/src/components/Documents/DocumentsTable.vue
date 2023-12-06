@@ -40,12 +40,12 @@
 
   const getAllData = async (tableProps) => {
     let pagination = await tableProps?.pagination ?? data.pagination
-    const { page } = await pagination
+
+    const { page, rowsPerPage } = await pagination
 
     data.loading = true
 
-
-    const params = await { page }
+    const params = await { page, rowsPerPage }
 
     await api.get('/documents', { params })
       .then(async (res) => {

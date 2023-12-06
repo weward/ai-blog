@@ -8,7 +8,7 @@ class DocumentService {
 
     public function filter()
     {
-        $documents = Document::query()->orderBy('id', 'DESC')->paginate();
+        $documents = Document::query()->orderBy('id', 'DESC')->paginate(request()->rowsPerPage);
 
         return $documents;
     }

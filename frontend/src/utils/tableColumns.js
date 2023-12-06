@@ -23,7 +23,7 @@ export const documentsTableColumns = [
     required: true,
     label: 'Last Updated',
     align: 'right',
-    field: row => row.updated_at,
+    field: row => row.updated_at.human,
     format: val => `${val}`,
     style: 'width:240px',
     sortable: true

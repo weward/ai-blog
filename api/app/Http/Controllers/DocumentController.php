@@ -25,7 +25,9 @@ class DocumentController extends Controller
     {
         $entities = $this->documentService->filter();
 
-        return response()->jsonApi(new DocumentCollection($entities), 200);
+        $entities = new DocumentCollection($entities);
+
+        return response()->jsonApi($entities, 200);
     }
 
     /**
