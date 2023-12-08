@@ -47,15 +47,20 @@
 
     const params = await { page, rowsPerPage }
 
-    await api.get('/documents', { params })
-      .then(async (res) => {
-        data.rows = await res.data.data
-        data.pagination.rowsNumber = await res.data.meta.total
-        data.pagination = await {...pagination}
-        await router.push({ name: 'documents.index', params })
-      }).finally(() => {
-        data.loading = false
-      })
+    await api.get('/documents', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      },
+      params,
+    }).then(async (res) => {
+      data.rows = await res.data.data
+      data.pagination.rowsNumber = await res.data.meta.total
+      data.pagination = await {...pagination}
+      await router.push({ name: 'documents.index', params })
+    }).finally(() => {
+      data.loading = false
+    })
   }
 
   const viewDocument = (row) => {

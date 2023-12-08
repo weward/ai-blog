@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class DocumentCreateTest extends TestCase
@@ -12,6 +14,8 @@ class DocumentCreateTest extends TestCase
 
     public function test_store_document(): void
     {
+        Sanctum::actingAs(User::factory()->create());
+
         $response = $this->postJson(route('documents.store'), [
             'subject' => 'This is a sample subject. Give meaning to it.',
             'summary' => 'This is the summary containing all that is there about the subject.',
@@ -24,6 +28,8 @@ class DocumentCreateTest extends TestCase
 
     public function test_storing_invalid_document_fails(): void
     {
+        Sanctum::actingAs(User::factory()->create());
+
         $response = $this->postJson(route('documents.store'), [
             'subject' => 'a',
             'summary' => 's',

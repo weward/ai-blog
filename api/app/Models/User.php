@@ -12,6 +12,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
+    const AUTH_FAILED = 'Login failed.';
+    const REGISTRATION_FAILED = 'Registration failed.';
+    const REGISTRATION_SUCCESSFUL = 'Registration was successful.';
+    const LOGOUT_FAILED = 'Logout failed.';
+    const LOGOUT_SUCCESSFUL = 'Logout was successful.';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,4 +50,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Email Query Scope
+     */
+    public function scopeEmail($query, $value)
+    {
+        $query->where('email', $value);
+    }
+
 }

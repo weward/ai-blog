@@ -19,7 +19,7 @@ class DocumentResource extends JsonResource
             'subject' => $this->subject,
             'summary' => $this->summary,
             'bullets' => str_replace('\\n', '<br>', $this->bullets),
-            'result' => $this->result,
+            'result' => str_replace('\\n', '<br>', $this->result),
             'created_at' => new DateTimeResource($this->created_at),
             'updated_at' => new DateTimeResource($this->updated_at),
         ];

@@ -44,7 +44,7 @@ class DocumentController extends Controller
         return response()->jsonApi(new DocumentResource($entity), 201);
     }
 
-    public function show(Request $request, Document $document)
+    public function show(Request $request, Document &$document)
     {
         return response()->jsonApi(new DocumentResource($document), 200);
     }

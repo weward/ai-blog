@@ -26,5 +26,16 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
 
+  Router.beforeEach((to, from, next) => {
+    const isAuth = localStorage.getItem('authToken')
+    if (to.meta.requiresAuth && !isAuth) {
+      next({ name: 'auth.login' })
+    } else if (!to.meta.requiresAuth && isAuth) {
+      next({ name: 'documents.index' })
+    } else {
+      next()
+    }
+  })
+
   return Router
 })

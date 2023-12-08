@@ -155,6 +155,12 @@ const generatePlot = () => {
 
   api.post('/documents/article-plot', {
     subject: form.subject,
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+    }
   }).then((res) => {
     form.summary = res.data.summary
     form.bullets = res.data.bullets
@@ -174,6 +180,12 @@ const generateResult = () => {
 
   api.post('/documents/article-result', {
     bullets: form.bullets,
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+    }
   }).then((res) => {
     form.result = res.data
     data.hasResult = true
@@ -189,7 +201,12 @@ const save = () => {
   clearErrors()
   data.loading = true
 
-  api.post('/documents', form).then(() => {
+  api.post('/documents', form, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+    }
+  }).then(() => {
     router.push({ name: 'documents.index' })
   }).catch((err) => {
     showError(err, 'result', 'Saving failed! Please try again.')

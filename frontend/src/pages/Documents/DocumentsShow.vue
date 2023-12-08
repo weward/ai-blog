@@ -21,7 +21,7 @@
 
         <q-card-section>
           <div class="text-subtitle2 tw-py-3">Content</div>
-          <div v-html="data.entity.result"></div>
+          <div v-html="data.entity.result" style="white-space: pre-line;"></div>
         </q-card-section>
       </q-card>
     </div>
@@ -41,12 +41,16 @@ const data = reactive({
 })
 
 const loadData = async (id) => {
-  await api.get(`/documents/${id}`)
-    .then(async (res) => {
-      data.entity = await res.data.data
-    }).finally(() => {
-      data.loading = false
-    })
+  await api.get(`/documents/${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+    }
+  }).then(async (res) => {
+    data.entity = await res.data.data
+  }).finally(() => {
+    data.loading = false
+  })
 }
 
 watchEffect(async () => {

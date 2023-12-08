@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AIArticleController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
 use App\Models\Document;
 use Illuminate\Http\Request;
@@ -21,12 +22,21 @@ Route::bind('document', function($param) {
     return Document::findOrFail($param);
 });
 
-Route::prefix('documents')->group(function() {
-    Route::get('/', [DocumentController::class, 'index'])->name('documents.index');
-    Route::post('/', [DocumentController::class, 'store'])->name('documents.store');
-    Route::get('{document}', [DocumentController::class, 'show'])->name('documents.show');
+Route::middleware('auth:sanctum')->group(function() {
+    Route::prefix('documents')->group(function() {
+        Route::get('/', [DocumentController::class, 'index'])->name('documents.index');
+        Route::post('/', [DocumentController::class, 'store'])->name('documents.store');
+        Route::get('{document}', [DocumentController::class, 'show'])->name('documents.show');
 
-    Route::post('/article-plot', [AIArticleController::class, 'generatePlot'])->name('documents.article-plot');
-    Route::post('/article-result', [AIArticleController::class, 'generateResult'])->name('documents.article-result');
+        Route::post('/article-plot', [AIArticleController::class, 'generatePlot'])->name('documents.article-plot');
+        Route::post('/article-result', [AIArticleController::class, 'generateResult'])->name('documents.article-result');
 
+    });
+
+    Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+Route::prefix('auth')->group(function () {
+    Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 });

@@ -16,23 +16,31 @@ class DocumentFactory extends Factory
      */
     public function definition(): array
     {
+        $numOfBullets = $this->randNumOfBullets();
+
         return [
             'subject' => fake()->realText(80, 2),
             'summary' => fake()->realText(200, 2),
-            'bullets' => $this->createBullets(),
-            'result' => fake()->realText(3600, 2),
+            'bullets' => $this->createBullets($numOfBullets),
+            // 'result' => fake()->realText(3600, 2),
+            'result' => $this->generateResult($numOfBullets),
         ];
     }
 
-    public function createBullets()
+
+    public function randNumOfBullets()
     {
         $min = 4;
         $max = 8;
-        $rand = rand($min, $max);
 
+        return rand($min, $max);
+    }
+
+    public function createBullets($numOfBullets)
+    {
         $i = 0;
         $words = "";
-        while($i < $rand) {
+        while($i < $numOfBullets) {
             $company = fake()->company;
             $words .= "- {$company}\\n";
 
@@ -40,5 +48,20 @@ class DocumentFactory extends Factory
         }
 
         return $words;
+    }
+
+    public function generateResult($numOfBullets)
+    {
+        $i = 0;
+        $result = "";
+
+        while ($i < $numOfBullets) {
+            $paragraph = fake()->realText(1200, 2);
+            $result .= "{$paragraph}\\n\\n";
+
+            $i++;
+        }
+
+        return $result;
     }
 }
