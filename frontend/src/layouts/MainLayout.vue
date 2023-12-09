@@ -78,12 +78,7 @@ const toggleLeftDrawer = () => {
 
 
 const logout = () => {
-  api.post('auth/logout', {}, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-    }
-  }).then((res) => {
+  api.post('auth/logout', {}).then((res) => {
     localStorage.removeItem('authToken')
     localStorage.removeItem('authUser')
     router.push({ name: 'auth.login' })

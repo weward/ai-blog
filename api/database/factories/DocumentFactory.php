@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,16 +18,25 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         $numOfBullets = $this->randNumOfBullets();
+        $user = User::first();
 
         return [
+            'user_id' => $user->id,
             'subject' => fake()->realText(80, 2),
             'summary' => fake()->realText(200, 2),
             'bullets' => $this->createBullets($numOfBullets),
-            // 'result' => fake()->realText(3600, 2),
             'result' => $this->generateResult($numOfBullets),
         ];
     }
 
+    public function user($id)
+    {
+        return $this->state(function(array $attributes) use ($id) {
+            return [
+                'user_id' => $id,
+            ];
+        });
+    }
 
     public function randNumOfBullets()
     {

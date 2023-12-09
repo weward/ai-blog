@@ -13,4 +13,14 @@ class Document extends Model
 
     protected $guarded = [];
 
+    public function scopeUser($query, $id = null)
+    {
+        $query->where('user_id', $id ?? auth()->user()->id);
+    }
+
+    public function scopeFilter($query)
+    {
+        $query->user();
+    }
+
 }

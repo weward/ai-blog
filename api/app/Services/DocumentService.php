@@ -4,18 +4,23 @@ namespace App\Services;
 
 use App\Models\Document;
 
-class DocumentService {
-
+class DocumentService
+{
     public function filter()
     {
-        $documents = Document::query()->orderBy('id', 'DESC')->paginate(request()->rowsPerPage);
+        $documents = Document::query()
+            ->filter()
+            ->orderBy('id', 'DESC')
+            ->paginate(request()->rowsPerPage);
 
         return $documents;
     }
 
-    public function store($request) {
+    public function store($request)
+    {
         try {
             $document = Document::create([
+                'user_id' => auth()->user()->id,
                 'subject' => $request->subject,
                 'summary' => $request->summary,
                 'bullets' => $request->bullets,

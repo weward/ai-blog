@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/boot/axios'
 import { notify } from 'src/config/elements'
+import { updateLastActivity } from 'src/utils/time';
 
 export const useAuthStore = defineStore('authStore', {
   state: () => ({
@@ -25,6 +26,8 @@ export const useAuthStore = defineStore('authStore', {
         }).then((res) => {
           localStorage.setItem('authToken', res.data.token)
           localStorage.setItem('authUser', JSON.stringify(res.data.user))
+
+          updateLastActivity()
 
           this.authToken = res.data.token
           resolve()

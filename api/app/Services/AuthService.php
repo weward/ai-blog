@@ -60,7 +60,7 @@ class AuthService
     {
         try {
             $user = request()->user();
-            $user->tokens()->delete();
+            $user?->tokens()->delete();
         } catch (\Throwable $th) {
             info($th->getMessage());
             return false;
